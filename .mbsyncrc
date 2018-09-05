@@ -20,7 +20,7 @@ Channel angeldsphinx
 Master :angeldsphinx-remote:
 Slave :angeldsphinx-local:
 # Exclude everything under the internal [Gmail] folder, except the interesting folders
-# Patterns * ![Gmail]* "[Gmail]/Sent Mail" "[Gmail]/Starred" "[Gmail]/All Mail"    
+# Patterns * ![Gmail]* "[Gmail]/Sent Mail" "[Gmail]/Starred" "[Gmail]/All Mail"
 # Or include everything
 Patterns *
 
