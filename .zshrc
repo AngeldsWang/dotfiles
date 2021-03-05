@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/wang-zhenjun/.oh-my-zsh
+export ZSH=/Users/wangzhenjun/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -92,27 +92,28 @@ fi
 #export PATH="$PATH:$PERLBREW_HOME/bin"
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+export PATH="/usr/local/sbin:$PATH"
 
 # GOROOT="/usr/local/go"
 # export PATH="$PATH:$GOROOT/bin"
-export GOPATH="$HOME/lgg/Go"
+export GOPATH="$HOME/Go"
 export PATH="$GOPATH/bin:$PATH"
 export PATH="$HOME/.plenv/bin:$PATH"
 #export PATH="$HOME/.plenv/versions/5.12.4/bin:$PATH"
-eval "$(plenv init -)"
+eval "$(plenv init - zsh)"
 export LD_LIBRARY_PATH=`brew --prefix`/lib:$LD_LIBRARY_PATH
 export C_INCLUDE_PATH=`brew --prefix`/include:$C_INCLUDE_PATH
 
-export NVM_DIR="/Users/wang-zhenjun/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-export PATH="/Users/wang-zhenjun/.cask/bin:$PATH"
-source /usr/local/bin/virtualenvwrapper.sh
+export NVM_DIR="$HOME/.nvm"
+. "/usr/local/opt/nvm/nvm.sh"
+# [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+#source /usr/local/bin/virtualenvwrapper.sh
 export PATH=$PATH:/usr/local/storm/bin
 alias gb=$GOPATH/bin/gb
 export GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOBIN
-export PATH="/Users/wang-zhenjun/.rvm/gems/ruby-2.3.1/bin:$PATH"
-export PATH="/Users/wang-zhenjun/.plenv/shims:$PATH"
+# export PATH="/Users/wang-zhenjun/.rvm/gems/ruby-2.3.1/bin:$PATH"
+# export PATH="/Users/wang-zhenjun/.plenv/shims:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 
 export PATH="/opt/td-agent/usr/sbin:$PATH"
@@ -120,12 +121,17 @@ alias fluentd="/opt/td-agent/usr/sbin/td-agent"
 
 export PATH="/Library/TeX/texbin:$PATH"
 export PATH="$PATH:/Users/wang-zhenjun/works/library/go_appengine/"
-source /usr/local/Cellar/awscli/1.9.6/libexec/bin/aws_zsh_completer.sh
+#source /usr/local/Cellar/awscli/1.9.6/libexec/bin/aws_zsh_completer.sh
 
 export PKG_CONFIG_PATH=/usr/local/Cellar/zlib/1.2.8/lib/pkgconfig:/usr/local/lib/pkgconfig:/opt/X11/lib/pkgconfig
 export LDFLAGS="-L/usr/local/opt/zlib/lib"
 export CPPFLAGS="-I/usr/local/opt/zlib/include"
 export PKG_CONFIG_PATH="/usr/local/opt/zlib/lib/pkgconfig"
+
+#pcap
+export LDFLAGS="-L/usr/local/opt/libpcap/lib"
+export CPPFLAGS="-I/usr/local/opt/libpcap/include"
+export PKG_CONFIG_PATH="/usr/local/opt/libpcap/lib/pkgconfig"
 
 
 autoload -Uz compinit && compinit -i
@@ -146,29 +152,35 @@ export HOMEBREW_CASK_OPTS="--appdir=~/Applications"
 #eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)"
 
 
+# eval "$(chef shell-init bash)"
+eval "$(rbenv init -)"
 
-eval "$(chef shell-init bash)"
+OPENSSL_PATH=/usr/local/opt/openssl
+if [ -d "$OPENSSL_PATH" ];then
+ export PATH=$OPENSSL_PATH/bin:$PATH
+ export LD_LIBRARY_PATH=$OPENSSL_PATH/lib:$LD_LIBRARY_PATH
+ export CPATH=$OPENSSL_PATH/include:$LD_LIBRARY_PATH
+fi
 
-#OPENSSL_PATH=/usr/local/opt/openssl
-#if [ -d "$OPENSSL_PATH" ];then
-#  export PATH=$OPENSSL_PATH/bin:$PATH
-#  export LD_LIBRARY_PATH=$OPENSSL_PATH/lib:$LD_LIBRARY_PATH
-#  export CPATH=$OPENSSL_PATH/include:$LD_LIBRARY_PATH
-#fi
-
-#export PERL_MM_OPT='LDFLAGS="-L/usr/local/opt/openssl/lib"'
-#export CPPFLAGS=-I/usr/local/opt/openssl/include 
-
-
+export PERL_MM_OPT='LDFLAGS="-L/usr/local/opt/openssl/lib"'
+export CPPFLAGS=-I/usr/local/opt/openssl/include
 
 export PLACK_ENV=development
-
 export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
 
 export PATH="/usr/local/Cellar/python/2.7.13/Frameworks/Python.framework/Versions/2.7/bin:$PATH"
+export PATH="$HOME/Library/Python/2.7/bin:$PATH"
+export PATH="/usr/local/opt/python@3.8/bin:$PATH"
 
 export PATH="/usr/local/opt/llvm/bin:$PATH"
 export PATH="/usr/local/opt/sbt@0.13/bin:$PATH"
+
+export PATH="/usr/local/opt/bison/bin:$PATH"
+export PATH="$HOME/.bin:$PATH"
+export PATH="$HOME/.rakudobrew/bin:$PATH"
+eval "$(rakudobrew init Zsh)"
+perl6_site_bin=$(greadlink -f $(which perl6) | perl -E '$path = <>; $path =~ s/bin/share/g; chomp $path; print "$path/site/bin";')
+export PATH="$perl6_site_bin:$PATH"
 
 # /usr/local/bin/emacsclient
 export EDITOR=emacsclient
@@ -193,4 +205,16 @@ export LC_ALL=
 
 
 alias tf='/usr/local/bin/terraform'
+export MANPATH="`manpath`:/usr/local/share/linux_man"
+export PATH="/usr/local/opt/mongodb-community@4.0/bin:$PATH"
 
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/local/bin/vault vault
+
+export CONSUL_HTTP_HOST=10.20.198.30
+export CONSUL_HTTP_PORT=2280
+
+export PATH="/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin:$PATH"
+plugins=(kubectl)
+source <(kubectl completion zsh)

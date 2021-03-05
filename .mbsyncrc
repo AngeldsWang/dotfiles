@@ -1,3 +1,4 @@
+# personal
 IMAPAccount angeldsphinx
 Host imap.gmail.com
 User angeldsphinx@gmail.com
@@ -17,15 +18,44 @@ Path ~/.mail/angeldsphinx/
 Inbox ~/.mail/angeldsphinx/Inbox
 
 Channel angeldsphinx
-Master :angeldsphinx-remote:
-Slave :angeldsphinx-local:
+Far :angeldsphinx-remote:
+Near :angeldsphinx-local:
 # Exclude everything under the internal [Gmail] folder, except the interesting folders
-# Patterns * ![Gmail]* "[Gmail]/Sent Mail" "[Gmail]/Starred" "[Gmail]/All Mail"
+# Patterns * ![Gmail]* "[Gmail]/Sent Mail" "[Gmail]/Starred" "[Gmail]/All Mail"    
 # Or include everything
 Patterns *
-
 # Automatically create missing mailboxes, both locally and on the server
 Create Both
+# Save the synchronization state files in the relevant directory
+SyncState *
 
+# perl
+IMAPAccount wzjmit
+Host imap.gmail.com
+User wzjmit@gmail.com
+PassCmd "gpg -q --for-your-eyes-only --no-tty -d ~/.emacs.d/secrets/.authinfo.gpg | awk '/wzjmit@gmail.com/ {print $NF}'"
+# Use SSL
+SSLType IMAPS
+AuthMechs Login
+CertificateFile /usr/local/etc/openssl/cert.pem
+
+IMAPStore wzjmit-remote
+Account wzjmit
+
+MaildirStore wzjmit-local
+Subfolders Verbatim
+# The trailing "/" is important
+Path ~/.mail/wzjmit/
+Inbox ~/.mail/wzjmit/Inbox
+
+Channel wzjmit
+Far :wzjmit-remote:
+Near :wzjmit-local:
+# Exclude everything under the internal [Gmail] folder, except the interesting folders
+# Patterns * ![Gmail]* "[Gmail]/Sent Mail" "[Gmail]/Starred" "[Gmail]/All Mail"    
+# Or include everything
+Patterns *
+# Automatically create missing mailboxes, both locally and on the server
+Create Both
 # Save the synchronization state files in the relevant directory
 SyncState *
