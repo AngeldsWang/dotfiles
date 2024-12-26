@@ -1,0 +1,16 @@
+* dotfiles
+
+My dotfiles. Basically only works on macOS. Just for personal usage.
+
+- vim: using [amix/vimrc](https://github.com/amix/vimrc)
+- tmux: update to v2.6
+- iterm2 color: using [nova-colors](https://github.com/trevordmiller/nova-colors)
+- Convert nova.itermcolors scheme to ghostty
+
+#+begin_src bash
+$ git clone git@github.com:mbadolato/iTerm2-Color-Schemes.git && cd iTerm2-Color-Schemes
+$ cp your/path/to/nova.itermcolors schemes/nova.itermcolors
+$ cd tools
+$ gen.py -s nova -t ghostty
+$ mv ghostty/nova ./ghostty/themes/nova
+#+end_src
