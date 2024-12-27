@@ -2,3 +2,9 @@ font-family = "Hack"
 font-size = 10
 
 theme = nova
+
+keybind = alt+b=esc:b
+keybind = alt+f=esc:f
+keybind = alt+d=esc:d
+keybind = ctrl+backspace=text:\x17
+keybind = super+backspace=text:\x15
